@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Contact Form - Hajin Park" />
+    <link rel="stylesheet" href="styling/styles.css" />
+    <link rel="stylesheet" href="styling/form-styles.css" />
+    <script src="scripts/theme-toggle.js"></script>
+    <noscript>
+      <style>
+        .theme-toggle { display: none !important; }
+      </style>
+    </noscript>
+    <title>Contact Form with JavaScript</title>
+  </head>
+  <body class="site-frame">
+    <div class="transition-line transition-line-1"></div>
+    <div class="transition-line transition-line-2"></div>
+    <div class="transition-line transition-line-3"></div>
+    <nav class="site-frame-header">
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="hamburger-label">
+        <img
+          src="assets/icons/burger-menu-black.svg"
+          alt="Open navigation menu"
+          class="hamburger-icon hamburger-icon-light"
+          width="24"
+          height="24"
+        />
+        <img
+          src="assets/icons/burger-menu-white.svg"
+          alt="Open navigation menu"
+          class="hamburger-icon hamburger-icon-dark"
+          width="24"
+          height="24"
+        />
+        <img
+          src="assets/icons/exit-right-black.svg"
+          alt="Close navigation menu"
+          class="close-icon close-icon-light"
+          width="24"
+          height="24"
+        />
+        <img
+          src="assets/icons/exit-right-white.svg"
+          alt="Close navigation menu"
+          class="close-icon close-icon-dark"
+          width="24"
+          height="24"
+        />
+      </label>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="pages/projects.html">Projects</a></li>
+        <li><a href="pages/cats.html">Cats</a></li>
+        <li><a href="pages/career.html">Career</a></li>
+        <li><a href="pages/resume.html">Resume</a></li>
+        <li><a href="pages/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main class="site-frame-body">
+      <header>
+        <h1>Contact Form</h1>
+      </header>
+
+      <form action="https://httpbin.org/post" method="post" class="contact-form">
+        <label for="name">
+          Name <span class="required-indicator">*</span>
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          minlength="2"
+          maxlength="100"
+          pattern="[A-Za-z\s\-']+"
+          aria-required="true"
+        />
+
+        <label for="email">
+          Email <span class="required-indicator">*</span>
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          aria-required="true"
+        />
+
+        <label for="subject">
+          Subject <span class="required-indicator">*</span>
+        </label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          required
+          minlength="3"
+          maxlength="100"
+          aria-required="true"
+        />
+
+        <label for="comments">
+          Comments <span class="required-indicator">*</span>
+        </label>
+        <textarea
+          id="comments"
+          name="comments"
+          rows="6"
+          required
+          minlength="10"
+          maxlength="500"
+          aria-required="true"
+        ></textarea>
+        <div id="char-counter" class="char-counter" aria-live="polite">
+          <span id="char-count">0</span> / 500 characters
+        </div>
+
+        <input type="hidden" name="possible_bot" value="true" />
+
+        <button type="submit">Submit</button>
+
+        <output id="error-output" aria-live="polite"></output>
+        <output id="info-output" aria-live="polite"></output>
+      </form>
+    </main>
+
+    <footer class="site-frame-footer">
+      <p>&copy; 2025 Hajin Park. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts/form-validation.js"></script>
+  </body>
+</html>
+

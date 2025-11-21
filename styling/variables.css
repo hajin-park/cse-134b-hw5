@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+:root {
+  color-scheme: light dark;
+
+  /* Light theme colors */
+  --text-light: color(display-p3 0.05 0.08 0.07);
+  --background-light: color(display-p3 0.99 0.99 0.98);
+  --primary-light: color(display-p3 0.55 0.75 0.7);
+  --primary-foreground-light: color(display-p3 0.85 0.95 0.92);
+  --secondary-light: color(display-p3 0.85 0.7 0.85);
+  --secondary-foreground-light: color(display-p3 0.95 0.88 0.95);
+  --accent-light: color(display-p3 0.85 0.8 0.6);
+  --accent-foreground-light: color(display-p3 0.92 0.88 0.75);
+
+  /* Dark theme colors */
+  --text-dark: color-mix(
+    in display-p3,
+    color(display-p3 0.95 0.98 0.97),
+    white 5%
+  );
+  --background-dark: color-mix(
+    in display-p3,
+    color(display-p3 0.08 0.1 0.09),
+    black 20%
+  );
+  --primary-dark: color-mix(
+    in display-p3,
+    color(display-p3 0.55 0.75 0.7),
+    black 5%
+  );
+  --primary-foreground-dark: color-mix(
+    in display-p3,
+    color(display-p3 0.65 0.8 0.75),
+    black 50%
+  );
+  --secondary-dark: color-mix(
+    in display-p3,
+    color(display-p3 0.85 0.7 0.85),
+    black 15%
+  );
+  --secondary-foreground-dark: color-mix(
+    in display-p3,
+    color(display-p3 0.75 0.65 0.75),
+    black 40%
+  );
+  --accent-dark: color-mix(
+    in display-p3,
+    color(display-p3 0.85 0.8 0.6),
+    black 15%
+  );
+  --accent-foreground-dark: color-mix(
+    in display-p3,
+    color(display-p3 0.8 0.75 0.6),
+    black 40%
+  );
+
+  /* Active theme colors - default to light */
+  --text: var(--text-light);
+  --background: var(--background-light);
+  --primary: var(--primary-light);
+  --primary-foreground: var(--primary-foreground-light);
+  --secondary: var(--secondary-light);
+  --secondary-foreground: var(--secondary-foreground-light);
+  --accent: var(--accent-light);
+  --accent-foreground: var(--accent-foreground-light);
+
+  /* Font and spacing variables */
+  --font-primary: "Lora";
+  --page-padding-height: 2%;
+  --page-padding-width: 10%;
+}
+
+/* Dark theme override */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --text: var(--text-dark);
+  --background: var(--background-dark);
+  --primary: var(--primary-dark);
+  --primary-foreground: var(--primary-foreground-dark);
+  --secondary: var(--secondary-dark);
+  --secondary-foreground: var(--secondary-foreground-dark);
+  --accent: var(--accent-dark);
+  --accent-foreground: var(--accent-foreground-dark);
+}
+
+/* Light theme explicit */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --text: var(--text-light);
+  --background: var(--background-light);
+  --primary: var(--primary-light);
+  --primary-foreground: var(--primary-foreground-light);
+  --secondary: var(--secondary-light);
+  --secondary-foreground: var(--secondary-foreground-light);
+  --accent: var(--accent-light);
+  --accent-foreground: var(--accent-foreground-light);
+}
+
+/* iPhone 14 Pro Max width */
+@media screen and (min-width: 430px) {
+  :root {
+    --page-padding-height: 4%;
+    --page-padding-width: 15%;
+  }
+}
+
+/* iPad Pro width */
+@media screen and (min-width: 1024px) {
+  :root {
+    --page-padding-height: 5%;
+    --page-padding-width: 20%;
+  }
+}
+
+/* Random desktop width */
+@media screen and (min-width: 1920px) {
+  :root {
+    --page-padding-height: 6%;
+    --page-padding-width: 25%;
+  }
+}
