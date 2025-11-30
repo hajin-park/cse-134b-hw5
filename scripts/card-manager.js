@@ -6,47 +6,68 @@
   'use strict';
 
   const STORAGE_KEY = 'pet-cards';
-  const JSON_URL = './db.json';
+  const REMOTE_API_URL = 'https://my-json-server.typicode.com/hajin-park/cse-134b-hw5/pets';
 
   let pets = [];
   let currentIndex = 0;
+  let currentSource = null; // 'local' or 'remote'
 
   /**
-   * Load pets from localStorage first, then fallback to JSON file
+   * Load pets from localStorage
    */
-  async function loadPets() {
-    // Try localStorage first
+  function loadLocalPets() {
+    currentSource = 'local';
+    currentIndex = 0;
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
       try {
         pets = JSON.parse(stored);
-        if (pets.length > 0) {
-          return;
-        }
       } catch (e) {
         console.warn('Failed to parse stored pets:', e);
+        pets = [];
       }
+    } else {
+      pets = [];
     }
-
-    // Fallback to JSON file
-    try {
-      const response = await fetch(JSON_URL);
-      if (response.ok) {
-        const data = await response.json();
-        pets = data.pets || [];
-        // Store in localStorage for future use
-        savePetsToStorage();
-      }
-    } catch (e) {
-      console.warn('Failed to load pets from JSON:', e);
-    }
+    displayCurrentCard();
+    updateLoadButtonState();
   }
 
   /**
-   * Save pets to localStorage
+   * Load pets from My JSON Server (remote)
    */
-  function savePetsToStorage() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(pets));
+  async function loadRemotePets() {
+    currentSource = 'remote';
+    currentIndex = 0;
+    try {
+      const response = await fetch(REMOTE_API_URL);
+      if (response.ok) {
+        pets = await response.json();
+      } else {
+        console.warn('Failed to fetch remote pets:', response.status);
+        pets = [];
+      }
+    } catch (e) {
+      console.warn('Failed to load pets from remote:', e);
+      pets = [];
+    }
+    displayCurrentCard();
+    updateLoadButtonState();
+  }
+
+  /**
+   * Update load button visual state to show active source
+   */
+  function updateLoadButtonState() {
+    const localBtn = document.getElementById('load-local-btn');
+    const remoteBtn = document.getElementById('load-remote-btn');
+
+    if (localBtn) {
+      localBtn.classList.toggle('active', currentSource === 'local');
+    }
+    if (remoteBtn) {
+      remoteBtn.classList.toggle('active', currentSource === 'remote');
+    }
   }
 
   function displayCurrentCard() {
@@ -107,26 +128,37 @@
   /**
    * Initialize card manager
    */
-  async function init() {
-    await loadPets();
-    displayCurrentCard();
-
-    // Set up swipe button listeners
+  function init() {
+    // Set up swipe button listeners using event delegation on card-display
     const cardDisplay = document.querySelector('.card-display');
-    const likeButton = cardDisplay.querySelector('.swipe-button.like');
-    const dislikeButton = cardDisplay.querySelector('.swipe-button.dislike');
 
-    if (likeButton) {
-      likeButton.addEventListener('click', function() {
-        handleSwipe('like');
+    if (cardDisplay) {
+      cardDisplay.addEventListener('click', function(e) {
+        const likeButton = e.target.closest('.swipe-button.like');
+        const dislikeButton = e.target.closest('.swipe-button.dislike');
+
+        if (likeButton) {
+          handleSwipe('like');
+        } else if (dislikeButton) {
+          handleSwipe('dislike');
+        }
       });
     }
 
-    if (dislikeButton) {
-      dislikeButton.addEventListener('click', function() {
-        handleSwipe('dislike');
-      });
+    // Set up load button listeners
+    const loadLocalBtn = document.getElementById('load-local-btn');
+    const loadRemoteBtn = document.getElementById('load-remote-btn');
+
+    if (loadLocalBtn) {
+      loadLocalBtn.addEventListener('click', loadLocalPets);
     }
+
+    if (loadRemoteBtn) {
+      loadRemoteBtn.addEventListener('click', loadRemotePets);
+    }
+
+    // Show empty state initially - user must click load button
+    displayCurrentCard();
   }
 
   // Initialize when DOM is ready
@@ -138,11 +170,15 @@
 
   // Expose for potential external use
   window.CardManager = {
-    loadPets: loadPets,
+    loadLocalPets: loadLocalPets,
+    loadRemotePets: loadRemotePets,
     displayCurrentCard: displayCurrentCard,
     resetCards: function() {
       currentIndex = 0;
       displayCurrentCard();
+    },
+    getCurrentSource: function() {
+      return currentSource;
     }
   };
 
