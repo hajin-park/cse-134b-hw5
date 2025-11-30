@@ -1,0 +1,55 @@
+{
+  "pets": [
+    {
+      "id": 1,
+      "title": "Hanuel",
+      "birthdate": "2019-08-10",
+      "description": "Hanuel is a very friendly cat.",
+      "species": "cat",
+      "strengths": [
+        "friendly",
+        "loving",
+        "fluffy"
+      ],
+      "weaknesses": [
+        "lazy"
+      ],
+      "compatibility": "Does not get along with other cats.",
+      "imageURL": "https://raw.githubusercontent.com/hajin-park/cse-134b-hw5/main/assets/cats/IMG_2470.jpeg"
+    },
+    {
+      "id": 2,
+      "title": "Ducky",
+      "birthdate": "2019-08-10",
+      "description": "Ducky is not a very friendly cat cat.",
+      "species": "cat",
+      "strengths": [
+        "friendly",
+        "loving",
+        "adorable"
+      ],
+      "weaknesses": [
+        "lazy"
+      ],
+      "compatibility": "Does not get along with other cats.",
+      "imageURL": "https://raw.githubusercontent.com/hajin-park/cse-134b-hw5/main/assets/cats/IMG_2491.jpeg"
+    },
+    {
+      "id": 3,
+      "title": "Lulu",
+      "birthdate": "2019-08-10",
+      "description": "Lulu is a very friendly cat.",
+      "species": "cat",
+      "strengths": [
+        "friendly",
+        "loving",
+        "adorable"
+      ],
+      "weaknesses": [
+        "lazy"
+      ],
+      "compatibility": "Does not get along with other cats.",
+      "imageURL": "https://raw.githubusercontent.com/hajin-park/cse-134b-hw5/main/assets/cats/IMG_3682.jpeg"
+    }
+  ]
+}
