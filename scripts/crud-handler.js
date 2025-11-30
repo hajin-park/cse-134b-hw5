@@ -161,3 +161,201 @@
     setTimeout(() => { statusEl.hidden = true; }, 3000);
   }
 
+  /**
+   * Render pet list for selection
+   */
+  async function renderPetList(containerSelector) {
+    const container = document.querySelector(containerSelector);
+    if (!container) return;
+
+    const mode = getMode();
+    const pets = mode === 'local' ? LocalStorage.getAll() : await RemoteAPI.getAll();
+
+    if (pets.length === 0) {
+      container.innerHTML = '<p class="pet-list-empty">No pets found. Create one first.</p>';
+      return;
+    }
+
+    container.innerHTML = pets.map(pet => `
+      <article class="pet-list-item">
+        <input type="radio" name="pet-select" id="pet-${pet.id}" value="${pet.id}" required>
+        <label for="pet-${pet.id}">${pet.title} (${pet.species})</label>
+      </article>
+    `).join('');
+  }
+
+  /**
+   * Get selected pet ID
+   */
+  function getSelectedPetId() {
+    const selected = document.querySelector('input[name="pet-select"]:checked');
+    return selected ? parseInt(selected.value) : null;
+  }
+
+  /**
+   * Handle Create Form Submit
+   */
+  async function handleCreate(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formSection = form.closest('.form-section');
+    const pet = parseFormData(form);
+    const mode = getMode();
+
+    let result;
+    if (mode === 'local') {
+      result = LocalStorage.create(pet);
+    } else {
+      result = await RemoteAPI.create(pet);
+    }
+
+    if (result) {
+      showStatus(formSection, `Pet "${pet.title}" created successfully!`, true);
+      form.reset();
+      renderPetList('.update-pet-list');
+      renderPetList('.delete-pet-list');
+    } else {
+      showStatus(formSection, 'Failed to create pet. Please try again.', false);
+    }
+  }
+
+  /**
+   * Handle Update Form Submit
+   */
+  async function handleUpdate(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formSection = form.closest('.form-section');
+    const petId = getSelectedPetId();
+
+    if (!petId) {
+      showStatus(formSection, 'Please select a pet to update.', false);
+      return;
+    }
+
+    const pet = parseFormData(form);
+    const mode = getMode();
+
+    let result;
+    if (mode === 'local') {
+      result = LocalStorage.update(petId, pet);
+    } else {
+      result = await RemoteAPI.update(petId, pet);
+    }
+
+    if (result) {
+      showStatus(formSection, `Pet updated successfully!`, true);
+      form.reset();
+      renderPetList('.update-pet-list');
+      renderPetList('.delete-pet-list');
+    } else {
+      showStatus(formSection, 'Failed to update pet. Please try again.', false);
+    }
+  }
+
+  /**
+   * Handle Delete Form Submit
+   */
+  async function handleDelete(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formSection = form.closest('.form-section');
+    const petId = getSelectedPetId();
+
+    if (!petId) {
+      showStatus(formSection, 'Please select a pet to delete.', false);
+      return;
+    }
+
+    const mode = getMode();
+    let result;
+    if (mode === 'local') {
+      result = LocalStorage.delete(petId);
+    } else {
+      result = await RemoteAPI.delete(petId);
+    }
+
+    if (result) {
+      showStatus(formSection, 'Pet deleted successfully!', true);
+      renderPetList('.update-pet-list');
+      renderPetList('.delete-pet-list');
+    } else {
+      showStatus(formSection, 'Failed to delete pet. Please try again.', false);
+    }
+  }
+
+  /**
+   * Load pet data into update form when selected
+   */
+  async function loadPetDataForUpdate(petId) {
+    const mode = getMode();
+    const pets = mode === 'local' ? LocalStorage.getAll() : await RemoteAPI.getAll();
+    const pet = pets.find(p => p.id === petId);
+
+    if (!pet) return;
+
+    const form = document.getElementById('update-form');
+    if (!form) return;
+
+    form.querySelector('[name="title"]').value = pet.title || '';
+    form.querySelector('[name="birthdate"]').value = pet.birthdate || '';
+    form.querySelector('[name="description"]').value = pet.description || '';
+    form.querySelector('[name="species"]').value = pet.species || '';
+    form.querySelector('[name="strengths"]').value = (pet.strengths || []).join(', ');
+    form.querySelector('[name="weaknesses"]').value = (pet.weaknesses || []).join(', ');
+    form.querySelector('[name="compatibility"]').value = pet.compatibility || '';
+    form.querySelector('[name="imageURL"]').value = pet.imageURL || '';
+  }
+
+  /**
+   * Initialize CRUD handlers
+   */
+  function init() {
+    // Create form handler
+    const createForm = document.getElementById('create-form');
+    if (createForm) {
+      createForm.addEventListener('submit', handleCreate);
+    }
+
+    // Update form handler
+    const updateForm = document.getElementById('update-form');
+    if (updateForm) {
+      updateForm.addEventListener('submit', handleUpdate);
+    }
+
+    // Delete form handler
+    const deleteForm = document.getElementById('delete-form');
+    if (deleteForm) {
+      deleteForm.addEventListener('submit', handleDelete);
+    }
+
+    // Event delegation for pet list selection (for update)
+    const updatePetList = document.querySelector('.update-pet-list');
+    if (updatePetList) {
+      updatePetList.addEventListener('change', function(e) {
+        if (e.target.matches('input[name="pet-select"]')) {
+          loadPetDataForUpdate(parseInt(e.target.value));
+        }
+      });
+    }
+
+    // Initial render of pet lists
+    renderPetList('.update-pet-list');
+    renderPetList('.delete-pet-list');
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // Expose for potential external use
+  window.CRUDHandler = {
+    LocalStorage: LocalStorage,
+    RemoteAPI: RemoteAPI,
+    renderPetList: renderPetList
+  };
+
+})();
