@@ -63,6 +63,10 @@ class PetCard extends HTMLElement {
     const age = this.calculateAge(birthdate);
     const ageText = age !== null ? `${age} years old` : '';
 
+    // Generate Wikipedia URL for the species
+    const speciesCapitalized = species.charAt(0).toUpperCase() + species.slice(1).toLowerCase();
+    const wikipediaUrl = species ? `https://en.wikipedia.org/wiki/${encodeURIComponent(speciesCapitalized)}` : '#';
+
     this.innerHTML = `
       <article class="pet-card-content">
         <figure class="pet-card-image">
@@ -108,7 +112,7 @@ class PetCard extends HTMLElement {
         </section>
         
         <footer class="pet-card-footer">
-          <a href="#" class="pet-link" aria-label="Learn more about ${title}">Learn more about ${title}</a>
+          <a href="${wikipediaUrl}" class="pet-link" target="_blank" rel="noopener noreferrer" aria-label="Learn more about ${species}s on Wikipedia">Learn more about ${species}s</a>
         </footer>
       </article>
     `;

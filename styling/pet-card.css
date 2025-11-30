@@ -5,7 +5,8 @@
 pet-card {
   display: block;
   width: 100%;
-  max-width: 400px;
+  max-width: 350px;
+  max-height: 60vh;
   margin: 0 auto;
 }
 
@@ -18,13 +19,15 @@ pet-card {
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: 60vh;
 }
 
 /* Pet Image Figure */
 .pet-card-image {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .pet-card-image picture {
@@ -43,7 +46,7 @@ pet-card {
 .pet-card-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   gap: 0.5rem;
   padding: 1rem;
   border-bottom: 1px solid var(--primary-foreground);
@@ -54,15 +57,17 @@ pet-card {
   font-weight: 700;
   color: var(--text);
   margin: 0;
+  line-height: 1.2;
 }
 
 .pet-species {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: var(--primary);
   text-transform: capitalize;
-  padding: 0.125rem 0.5rem;
+  padding: 0.25rem 0.5rem;
   background-color: var(--primary-foreground);
   border-radius: 0.25rem;
+  line-height: 1;
 }
 
 .pet-card-header time {
@@ -78,6 +83,8 @@ pet-card {
   flex-direction: column;
   gap: 0.75rem;
   padding: 1rem;
+  overflow-y: auto;
+  flex: 1;
 }
 
 .pet-description {

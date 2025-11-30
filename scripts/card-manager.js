@@ -49,13 +49,10 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(pets));
   }
 
-  /**
-   * Display the current pet card
-   */
   function displayCurrentCard() {
-    const cardDisplay = document.querySelector('.card-display');
+    const cardContainer = document.querySelector('.card-container');
     const emptyState = document.querySelector('.empty-state');
-    const existingCard = cardDisplay.querySelector('pet-card');
+    const existingCard = cardContainer.querySelector('pet-card');
 
     // Remove existing card
     if (existingCard) {
@@ -76,8 +73,8 @@
     petCard.classList.add('entering');
 
     // Insert before reaction overlays
-    const reactionOverlay = cardDisplay.querySelector('.reaction-overlay');
-    cardDisplay.insertBefore(petCard, reactionOverlay);
+    const reactionOverlay = cardContainer.querySelector('.reaction-overlay');
+    cardContainer.insertBefore(petCard, reactionOverlay);
 
     // Remove entering animation class after animation completes
     petCard.addEventListener('animationend', function() {
@@ -85,15 +82,12 @@
     }, { once: true });
   }
 
-  /**
-   * Show reaction animation and advance to next card
-   */
   function handleSwipe(direction) {
-    const cardDisplay = document.querySelector('.card-display');
-    const currentCard = cardDisplay.querySelector('pet-card');
-    const overlay = cardDisplay.querySelector(`.reaction-overlay.${direction}`);
+    const cardContainer = document.querySelector('.card-container');
+    const currentCard = cardContainer.querySelector('pet-card');
+    const overlay = cardContainer.querySelector(`.reaction-overlay.${direction}`);
 
-    if (!currentCard || currentIndex >= pets.length) return;
+    if (!currentCard || pets.length === 0) return;
 
     // Show reaction overlay animation
     overlay.classList.add('animate');
@@ -104,7 +98,8 @@
     // Wait for animations to complete
     setTimeout(function() {
       overlay.classList.remove('animate');
-      currentIndex++;
+      // Wrap around to first card when reaching the end
+      currentIndex = (currentIndex + 1) % pets.length;
       displayCurrentCard();
     }, 600);
   }
@@ -117,8 +112,9 @@
     displayCurrentCard();
 
     // Set up swipe button listeners
-    const likeButton = document.querySelector('.swipe-button.like');
-    const dislikeButton = document.querySelector('.swipe-button.dislike');
+    const cardDisplay = document.querySelector('.card-display');
+    const likeButton = cardDisplay.querySelector('.swipe-button.like');
+    const dislikeButton = cardDisplay.querySelector('.swipe-button.dislike');
 
     if (likeButton) {
       likeButton.addEventListener('click', function() {
