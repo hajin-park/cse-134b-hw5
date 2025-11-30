@@ -1,5 +1,6 @@
 @import "./variables.css";
 @import "./animations.css";
+@import "./pet-card.css";
 
 /* CSS global reset */
 * {
@@ -17,4 +18,182 @@ html {
   min-height: 100dvh;
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding: var(--page-padding-height) var(--page-padding-width);
+  background-color: var(--background);
+  color: var(--text);
+}
+
+/* Header Styles */
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+  background-color: var(--primary-foreground);
+  outline: none;
+}
+
+.theme-toggle svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.theme-toggle svg path {
+  stroke: var(--text);
+  fill: none;
+}
+
+.theme-toggle svg[data-icon="dark"] path {
+  fill: var(--text);
+  stroke: none;
+}
+
+/* Main Content Styles */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* Card Display Area */
+.card-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Empty State Message */
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text);
+  opacity: 0.7;
+}
+
+.empty-state p {
+  font-size: 1.125rem;
+}
+
+/* Reaction Icon Overlay */
+.reaction-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.reaction-overlay svg {
+  width: 5rem;
+  height: 5rem;
+}
+
+.reaction-overlay.like svg path {
+  fill: var(--primary);
+  stroke: var(--primary);
+}
+
+.reaction-overlay.dislike svg path {
+  stroke: var(--secondary);
+}
+
+/* Swipe Controls */
+.swipe-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 1rem 0;
+}
+
+.swipe-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.swipe-button:hover,
+.swipe-button:focus {
+  background-color: var(--primary-foreground);
+  outline: none;
+}
+
+.swipe-button:active {
+  transform: scale(0.95);
+}
+
+.swipe-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.swipe-button svg path {
+  stroke: var(--text);
+}
+
+.swipe-button.dislike {
+  border-color: var(--secondary);
+}
+
+.swipe-button.dislike:hover,
+.swipe-button.dislike:focus {
+  background-color: var(--secondary-foreground);
+}
+
+.swipe-button.like {
+  border-color: var(--primary);
+}
+
+/* Footer Styles */
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  margin-top: auto;
+}
+
+footer small {
+  font-size: 0.875rem;
+  color: var(--text);
+  opacity: 0.6;
 }

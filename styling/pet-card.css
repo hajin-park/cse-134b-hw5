@@ -1,0 +1,167 @@
+/* Pet Card Custom Element Styles */
+@import "./variables.css";
+
+/* Pet Card Container */
+pet-card {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Card Content Article */
+.pet-card-content {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+  border: 1px solid var(--primary);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Pet Image Figure */
+.pet-card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.pet-card-image picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.pet-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Card Header */
+.pet-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--primary-foreground);
+}
+
+.pet-card-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.pet-species {
+  font-size: 0.875rem;
+  color: var(--primary);
+  text-transform: capitalize;
+  padding: 0.125rem 0.5rem;
+  background-color: var(--primary-foreground);
+  border-radius: 0.25rem;
+}
+
+.pet-card-header time {
+  font-size: 0.875rem;
+  color: var(--text);
+  opacity: 0.7;
+  margin-left: auto;
+}
+
+/* Card Body */
+.pet-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.pet-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* Traits Sections */
+.pet-traits {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.pet-traits h3,
+.pet-compatibility h3 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  opacity: 0.6;
+  margin: 0;
+}
+
+.trait-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.trait-list li {
+  font-size: 0.8125rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  text-transform: capitalize;
+}
+
+.trait-list.strengths li {
+  background-color: var(--primary-foreground);
+  color: var(--text);
+}
+
+.trait-list.weaknesses li {
+  background-color: var(--secondary-foreground);
+  color: var(--text);
+}
+
+/* Compatibility Section */
+.pet-compatibility {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.pet-compatibility p {
+  font-size: 0.875rem;
+  color: var(--text);
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* Card Footer */
+.pet-card-footer {
+  padding: 1rem;
+  border-top: 1px solid var(--primary-foreground);
+}
+
+.pet-link {
+  display: block;
+  text-align: center;
+  color: var(--primary);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.pet-link:hover,
+.pet-link:focus {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
