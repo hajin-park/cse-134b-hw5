@@ -1,3 +1,74 @@
 @import "./variables.css";
 
-/* Simple CSS animations for actions: delete card, add card, edit card, swipe cards (left - disliked and right - liked) */
+/* CSS animations for actions: delete card, add card, edit card, swipe cards (left - disliked and right - liked) */
+
+/* Reaction overlay animation - show and fade */
+@keyframes reaction-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.reaction-overlay.animate {
+  animation: reaction-pop 0.6s ease-out forwards;
+}
+
+/* Card swipe out animations */
+@keyframes swipe-left {
+  0% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%) rotate(-10deg);
+  }
+}
+
+@keyframes swipe-right {
+  0% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%) rotate(10deg);
+  }
+}
+
+/* Card entrance animation */
+@keyframes card-enter {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+pet-card.swipe-left {
+  animation: swipe-left 0.3s ease-out forwards;
+}
+
+pet-card.swipe-right {
+  animation: swipe-right 0.3s ease-out forwards;
+}
+
+pet-card.entering {
+  animation: card-enter 0.3s ease-out forwards;
+}
