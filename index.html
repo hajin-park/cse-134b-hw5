@@ -33,32 +33,23 @@
         </menu>
       </nav>
       <button class="theme-toggle" type="button" aria-label="Toggle theme">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <use href="assets/icons/dark-theme.svg" data-icon="dark" />
-          <use href="assets/icons/light-theme.svg" data-icon="light" />
-        </svg>
+        <img src="assets/icons/light-theme.svg" alt="" data-icon="light" width="24" height="24" aria-hidden="true">
+        <img src="assets/icons/dark-theme.svg" alt="" data-icon="dark" width="24" height="24" aria-hidden="true">
       </button>
     </header>
 
     <main>
       <section class="card-display" aria-label="Pet cards">
         <button class="swipe-button dislike" type="button" aria-label="Dislike this pet">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M10 17L7 14L10 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M8 14L13.5 14C15.433 14 17 12.433 17 10.5V10.5C17 8.567 15.433 7 13.5 7L12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <img src="assets/icons/swipe-left.svg" alt="" width="24" height="24" aria-hidden="true">
         </button>
 
         <article class="card-container">
           <aside class="reaction-overlay like" aria-hidden="true">
-            <svg width="80" height="80" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M20.16,4.61A6.27,6.27,0,0,0,12,4a6.27,6.27,0,0,0-8.16,9.48l7.45,7.46a1,1,0,0,0,1.42,0l7.45-7.46A6.27,6.27,0,0,0,20.16,4.61Zm-1.41,7.45L12,18.81,5.25,12.06a4.26,4.26,0,0,1,5.54-6.45l-1.71,4a1,1,0,0,0,0,.83,1,1,0,0,0,.65.53l2.77.7L11.1,14.56a1,1,0,0,0,.46,1.34A1,1,0,0,0,12,16a1,1,0,0,0,.9-.56l2-4a1,1,0,0,0,0-.86,1.05,1.05,0,0,0-.67-.55l-2.83-.71,1.45-3.39a4.26,4.26,0,0,1,5.92,6.13Z"/>
-            </svg>
+            <img src="assets/icons/liked-card.svg" alt="" width="80" height="80" aria-hidden="true">
           </aside>
           <aside class="reaction-overlay dislike" aria-hidden="true">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img src="assets/icons/disliked-card.svg" alt="" width="80" height="80" aria-hidden="true">
           </aside>
           <article class="empty-state" hidden>
             <p>No cards currently exist</p>
@@ -66,10 +57,7 @@
         </article>
 
         <button class="swipe-button like" type="button" aria-label="Like this pet">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M14 17L17 14L14 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M16 14H10.5C8.567 14 7 12.433 7 10.5V10.5C7 8.567 8.567 7 10.5 7L12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <img src="assets/icons/swipe-right.svg" alt="" width="24" height="24" aria-hidden="true">
         </button>
       </section>
     </main>
@@ -80,8 +68,7 @@
 
     <noscript>
       <p>
-        This site works best with JavaScript enabled, but all content is
-        accessible without it.
+        This site works best with JavaScript enabled.
       </p>
     </noscript>
   </body>
