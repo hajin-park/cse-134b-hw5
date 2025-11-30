@@ -189,6 +189,15 @@
     e.preventDefault();
     const form = e.target;
     const formSection = form.closest('.form-section');
+
+    if (window.FormValidation) {
+      const validation = window.FormValidation.validateForm(form);
+      if (!validation.valid) {
+        showStatus(formSection, validation.errors[0], false);
+        return;
+      }
+    }
+
     const pet = parseFormData(form);
     const mode = getMode();
 
@@ -218,6 +227,14 @@
     if (!petId) {
       showStatus(formSection, 'Please select a pet to update.', false);
       return;
+    }
+
+    if (window.FormValidation) {
+      const validation = window.FormValidation.validateForm(form);
+      if (!validation.valid) {
+        showStatus(formSection, validation.errors[0], false);
+        return;
+      }
     }
 
     const pet = parseFormData(form);

@@ -126,6 +126,21 @@
   opacity: 0.6;
 }
 
+/* Validation Error Styles */
+.form-input.invalid,
+.form-textarea.invalid,
+.form-select.invalid {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+.form-error {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--secondary);
+  margin-top: 0.25rem;
+}
+
 /* Button Styles */
 .form-actions {
   display: flex;
