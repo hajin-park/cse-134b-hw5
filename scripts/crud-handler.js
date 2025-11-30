@@ -1,6 +1,5 @@
 /**
  * CRUD Handler
- * Handles Create, Read, Update, Delete operations for pet profiles
  */
 (function() {
   'use strict';
@@ -8,9 +7,6 @@
   const STORAGE_KEY = 'pet-cards';
   const REMOTE_API_URL = 'https://my-json-server.typicode.com/hajin-park/cse-134b-hw5/pets';
 
-  /**
-   * Get the current mode from the page
-   */
   function getMode() {
     return document.body.dataset.crudMode || 'local';
   }
@@ -68,7 +64,7 @@
   };
 
   /**
-   * Remote API Operations
+   * My JSON Server Operations
    */
   const RemoteAPI = {
     getAll: async function() {
@@ -184,17 +180,11 @@
     `).join('');
   }
 
-  /**
-   * Get selected pet ID
-   */
   function getSelectedPetId() {
     const selected = document.querySelector('input[name="pet-select"]:checked');
     return selected ? parseInt(selected.value) : null;
   }
 
-  /**
-   * Handle Create Form Submit
-   */
   async function handleCreate(e) {
     e.preventDefault();
     const form = e.target;
@@ -219,9 +209,6 @@
     }
   }
 
-  /**
-   * Handle Update Form Submit
-   */
   async function handleUpdate(e) {
     e.preventDefault();
     const form = e.target;
@@ -253,9 +240,6 @@
     }
   }
 
-  /**
-   * Handle Delete Form Submit
-   */
   async function handleDelete(e) {
     e.preventDefault();
     const form = e.target;
@@ -284,9 +268,6 @@
     }
   }
 
-  /**
-   * Load pet data into update form when selected
-   */
   async function loadPetDataForUpdate(petId) {
     const mode = getMode();
     const pets = mode === 'local' ? LocalStorage.getAll() : await RemoteAPI.getAll();
@@ -307,9 +288,6 @@
     form.querySelector('[name="imageURL"]').value = pet.imageURL || '';
   }
 
-  /**
-   * Initialize CRUD handlers
-   */
   function init() {
     // Create form handler
     const createForm = document.getElementById('create-form');
@@ -351,7 +329,6 @@
     init();
   }
 
-  // Expose for potential external use
   window.CRUDHandler = {
     LocalStorage: LocalStorage,
     RemoteAPI: RemoteAPI,

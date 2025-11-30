@@ -12,9 +12,6 @@
   let currentIndex = 0;
   let currentSource = null; // 'local' or 'remote'
 
-  /**
-   * Load pets from localStorage
-   */
   function loadLocalPets() {
     currentSource = 'local';
     currentIndex = 0;
@@ -33,9 +30,6 @@
     updateLoadButtonState();
   }
 
-  /**
-   * Load pets from My JSON Server (remote)
-   */
   async function loadRemotePets() {
     currentSource = 'remote';
     currentIndex = 0;
@@ -75,7 +69,6 @@
     const emptyState = document.querySelector('.empty-state');
     const existingCard = cardContainer.querySelector('pet-card');
 
-    // Remove existing card
     if (existingCard) {
       existingCard.remove();
     }
@@ -125,9 +118,6 @@
     }, 600);
   }
 
-  /**
-   * Initialize card manager
-   */
   function init() {
     // Set up swipe button listeners using event delegation on card-display
     const cardDisplay = document.querySelector('.card-display');
